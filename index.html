@@ -1,0 +1,465 @@
+<html>
+<head>
+	<title>Magic the Quiz - Plainswalker</title>
+	<meta charset="utf-8" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+</head>
+<body>
+	<style>
+		table {
+	    	border: 1px solid #AAA;
+	    	font-family: arial;
+	    	font-size: 14px;
+		}
+		table td:first-child {
+	    	padding: 5px;
+	    	width: 200px;
+		}
+		h1 {
+	    	border: 4px solid #ccc;
+	    	padding: 5px;
+	    	font-size: 30px;
+	    	font-family: Arial;
+	    	text-align: center;
+	    	color: #444;
+		}
+		
+		.button span {
+		  background-color: #EC528D;
+		    background-image: linear-gradient(rgba(249, 158, 191, 0.8), rgba(247, 109, 160, 0.2));
+		    border-radius: 8px 8px 8px 8px;
+		    box-shadow: 0 -1px 1px rgba(255, 255, 255, 0.15) inset;
+		    display: inline-block;
+		    font-family: 'Pacifico',Arial,sans-serif;
+		    line-height: 1;
+		    padding: 20px 30px;
+		    text-shadow: 0 -1px 1px rgba(175, 49, 95, 0.7);
+		    transition: background-color 0.2s ease-in-out 0s, transform 0.1s ease-in-out 0s;			
+		}
+		
+		.startquiz {
+			-moz-box-shadow:inset 0px 1px 0px 0px #e184f3;
+			-webkit-box-shadow:inset 0px 1px 0px 0px #e184f3;
+			box-shadow:inset 0px 1px 0px 0px #e184f3;
+			background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c123de), color-stop(1, #a20dbd) );
+			background:-moz-linear-gradient( center top, #c123de 5%, #a20dbd 100% );
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c123de', endColorstr='#a20dbd');
+			background-color:#c123de;
+			-moz-border-radius:6px;
+			-webkit-border-radius:6px;
+			border-radius:6px;
+			border:1px solid #a511c0;
+			display:inline-block;
+			color:#ffffff;
+			font-family:arial;
+			font-size:28px;
+			font-weight:bold;
+			padding:6px 24px;
+			text-decoration:none;
+			text-shadow:1px 1px 0px #9b14b3;
+		}.startquiz:hover {
+			background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a20dbd), color-stop(1, #c123de) );
+			background:-moz-linear-gradient( center top, #a20dbd 5%, #c123de 100% );
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a20dbd', endColorstr='#c123de');
+			background-color:#a20dbd;
+		}.startquiz:active {
+			position:relative;
+			top:1px;
+		}		
+		
+		.chosedrow {
+		    background-color: #c123de;
+			color:#fff;
+		}		
+		
+		.bar {
+		    background-color: #C08AC0;
+		    border: 1px solid #000000;
+		    border-radius: 2px 2px 2px 2px;
+		    box-shadow: 0 1px 0 0 #CCCCCC inset;
+		    display: block;
+		    float: left;
+		    height: 19px;
+		    margin-right: 2px;
+		    width: 8px;
+		}
+		
+		#quiz {
+			width:600px;
+			height:300px;
+		}
+	</style>
+	
+	
+	<div id="quiz">
+	<a class="startquiz" href="javascript:Bootstrap.initTest();">
+	<span>Qual Plainswalker eu seria?</span>
+	</a>
+	
+		
+	<div class="mychoice">
+	</div>
+	</div>
+	
+	<script language="Javascript">
+	var json_choices = {
+	    results: [{
+	        "id": 1,
+	            "value": "Tamiyo",
+	            "score": 0
+	    }, {
+	        "id": 2,
+	            "value": "Garruk Wildspeaker",
+	            "score": 0
+	    }, {
+	        "id": 3,
+	            "value": "Koth of the Hammer",
+	            "score": 0
+	    }, {
+	        "id": 4,
+	            "value": "Sarkhan Vol",
+	            "score": 0
+	    }, {
+	        "id": 5,
+	            "value": "Nissa Revane",
+	            "score": 0
+	    }, {
+	        "id": 6,
+	            "value": "Chandra Nalaar",
+	            "score": 0
+	    }, {
+	        "id": 7,
+	            "value": "Gideon Jura",
+	            "score": 0
+	    }, {
+	        "id": 8,
+	            "value": "Jace Beleren",
+	            "score": 0
+	    }, {
+	        "id": 9,
+	            "value": "Tezzeret",
+	            "score": 0
+	    }, {
+	        "id": 10,
+	            "value": "Venser",
+	            "score": 0
+	    }, {
+	        "id": 11,
+	            "value": "Tibalt",
+	            "score": 0
+	    }, {
+	        "id": 12,
+	            "value": "Nicol Bolas",
+	            "score": 0
+	    }, {
+	        "id": 13,
+	            "value": "Liliana Vess",
+	            "score": 0
+	    }, {
+	        "id": 14,
+	            "value": "Karn",
+	            "score": 0
+	    }, {
+	        "id": 15,
+	            "value": "Sorin Markov",
+	            "score": 0
+	    }, {
+	        "id": 16,
+	            "value": "Vraska",
+	            "score": 0
+	    }, {
+	        "id": 17,
+	            "value": "Ajani Goldmane",
+	            "score": 0
+	    }, {
+	        "id": 18,
+	            "value": "Elspeth Tirel",
+	            "score": 0
+	    }]
+	};
+
+
+	var json_questions = {
+	    "results": [{
+	        "question": "De onde você retira sua mana?",
+	        "answers": [{
+	            "text": "Da natureza e de forças primordiais.",
+	            "beneficiers": [1, 2, 3, 4, 5]
+	        }, {
+	            "text": "Das artes e das ciências.",
+	            "beneficiers": [6, 7, 8, 9, 10]
+	        }, {
+	            "text": "De forças ancestrais.",
+	            "beneficiers": [11, 12, 13, 14, 15]
+	        }, {
+	            "text": "De multidões e exércitos.",
+	            "beneficiers": [16, 17, 18, 19]
+	        }, {
+	            "text": "Do banco.",
+	            "beneficiers": [1,1,1,1,1,1,1,1]
+	        }]
+	    }, {
+	        "question": "Qual você considera a melhor forma de se vencer um duelo?",
+	        "answers": [{
+	            "text": "Utilizando técnicas apuradas de combate.",
+	            "beneficiers": [15, 12, 7, 6]
+	        }, {
+	            "text": "Através da inteligência, sem utilizar força física.",
+	            "beneficiers": [8, 13, 1, 10, 9]
+	        }, {
+	            "text": "Liderando um exército disciplinado.",
+	            "beneficiers": [17, 5, 18, 16, 14]
+	        }, {
+	            "text": "Invocando forças altamente destrutivas.",
+	            "beneficiers": [11, 4, 2, 3]
+	        }]
+	    }, {
+	        "question": "Qual é o seu maior tesouro?",
+	        "answers": [{
+	            "text": "Sua coleção de artefatos poderosos.",
+	            "beneficiers": [6, 10, 9, 13]
+	        }, {
+	            "text": "Sua raça e seus ancestrais.",
+	            "beneficiers": [5, 4, 15, 16, 14]
+	        }, {
+	            "text": "Sua inteligência e conhecimento.",
+	            "beneficiers": [1, 8, 12, 11]
+	        }, {
+	            "text": "Sua origem e natividade.",
+	            "beneficiers": [3, 7, 18, 2, 17]
+	        }]
+	    }, {
+	        "question": "Qual o lugar ideal para se viver?",
+	        "answers": [{
+	            "text": "Em meio a natureza intocada.",
+	            "beneficiers": [2, 17, 5, 4]
+	        }, {
+	            "text": "Numa sociedade pacífica buscando pela harmonia.",
+	            "beneficiers": [3, 1, 7, 8]
+	        }, {
+	            "text": "Em meio a tranquilidade onde você possa estudar e metidar.",
+	            "beneficiers": [18, 10, 12, 14, 15]
+	        }, {
+	            "text": "Numa sociedade hostil onde somente os fortes sobrevivem.",
+	            "beneficiers": [9, 6, 11, 16, 13]
+	        }]
+	    }, {
+	        "question": "Com relação aos outros.",
+	        "answers": [{
+	            "text": "Sempre é muito observador, estuda cada habito e costumes.",
+	            "beneficiers": [6, 14, 16, 1, 8]
+	        }, {
+	            "text": "Solitário, prefere se aperfeiçoar sozinho.",
+	            "beneficiers": [5, 12, 18, 3, 11]
+	        }, {
+	            "text": "É uma peça chave pra articulação de plano.",
+	            "beneficiers": [4, 10, 17, 9]
+	        }, {
+	            "text": "Utiliza seus poderes apenas quando incomodado.",
+	            "beneficiers": [2, 15, 13, 7]
+	        }]
+	    }]
+	};
+
+
+
+	Object.size = function(obj) {
+	    var size = 0, key;
+	    for (key in obj) {
+	        if (obj.hasOwnProperty(key)) size++;
+	    }
+	    return size;
+	};
+
+
+	var bigjay = {
+		results : []
+	}
+
+	var Entity = {
+		new : function(extend) {
+	     	return $.extend(extend, this);
+		}
+	}
+
+
+	var Pergunta = Entity.new({
+	   answers : [],
+	   question : '',
+
+	   create : function(pergunta, respostas) {
+	        this.question = pergunta;
+	        this.answers = respostas;
+	        return this;
+	   },
+
+	   answer : function(key) {
+	        var resposta = this.answers[key-1];
+	        resposta.process();
+	   },
+
+	   getQuestion : function() {
+	        return this.question;
+	   },
+
+	   getAnswers : function() {
+	        var result = '';
+	        for(var i in this.answers) {
+	            result += [Number(i)+1,') ', this.answers[i].getText(), '\n'].join('');
+	        }
+
+	        return result;
+	   },
+	});
+
+	var Resposta = Entity.new({
+	    text : '',
+	    beneficiers : [],
+
+	    getText : function() {
+	        return this.text;
+	    },
+
+		getBeneficiers : function() {
+			return this.beneficiers;
+		},
+
+	    create : function(texto_resposta, beneficiers) {
+	        this.text = texto_resposta;
+	        this.beneficiers = beneficiers;
+	        return this;
+	    },
+
+	    process : function() {
+	        var temp;
+	        console.info('Resposta: ', this.text);
+	        for(var i in this.beneficiers) {
+	            temp = CollectionEscolhas.getById(this.beneficiers[i]);
+	            temp.score++;
+	        }
+	    },
+
+	   new : function() {
+	        return $.extend({}, this);
+	   }
+	});
+
+	var Collection = Entity.new({
+	    store : [],
+
+	    add : function(id, object) {
+	        this.store.push({
+	            id: id, 
+	            value: object,
+	            score: 0
+	         });
+	    },
+
+	    get : function() {
+	        return this.store;
+	    },
+
+	    getById : function(id) {
+	        for(var i in this.store) {
+	            if(this.store[i].id == id)
+	                return this.store[i];
+	        }
+
+	        return false;
+	    },
+
+	    getHigher : function() {
+	        var higher_score = 0;
+	        var higher_object = {};
+	        for(var i in this.store) {
+	            if(this.store[i].score > higher_score) {
+	                higher_obj = this.store[i];
+	                higher_score = this.store[i].score;
+	            }
+	        }
+
+	        return higher_obj;
+	    },
+
+	    rankingGraphic : function() {
+			var tabela = $("<table/>");
+			
+	        for(var i in this.store) {
+
+	            var bars = '';
+	            for(var k=0; k < this.store[i].score; k++){
+	                bars += '<span class=bar></span>';
+	            }
+		
+				var linha = $("<tr />");
+	            if(this.getHigher().id == this.store[i].id) {
+	                linha.attr('class', 'chosedrow');
+	            }				
+				
+				linha.append($("<td />").html(this.store[i].value));
+				linha.append($("<td />").html(bars));				
+				tabela.append(linha);
+	        }
+			$(".mychoice").append(tabela.appendTo("body"));
+	    }
+	});
+
+
+	var Bootstrap = {
+		init : function() {
+			this.initChoices();
+			this.initQuestions();
+		},
+		
+		initChoices : function() {
+			CollectionEscolhas = Collection.new();
+			for(var c in json_choices.results) {
+			    var choice_item = json_choices.results[c];
+			    CollectionEscolhas.add(choice_item.id, choice_item.value);
+			}		
+		},
+
+		initQuestions : function() {
+			question_collection = [];
+			var final_question;
+			var final_answers = [];
+			var text;
+			var i,j,k;
+			for(i in json_questions.results) {
+			   final_answers = [];
+			   final_question = json_questions.results[i].question;
+			   answers = json_questions.results[i].answers;
+
+			   for(j in answers) {
+			       text = answers[j].text;
+			       beneficiers = answers[j].beneficiers;
+			       final_answers[final_answers.length] = Resposta.new().create(text, beneficiers);
+			   }
+
+			   question_collection[question_collection.length] = Pergunta.new().create(final_question, final_answers);    
+			}
+		},
+
+		initTest : function() {
+			
+			for(var i in CollectionEscolhas.store) {
+				CollectionEscolhas.store[i].score = 0;
+			}
+			
+			$(".mychoice").html('');
+			var question_obj;
+			for(var k in question_collection) {
+				question_obj = question_collection[k];
+				question_obj.answer(prompt([question_obj.getQuestion(), '\n', question_obj.getAnswers()].join('')));	
+			}
+
+			var escolha = CollectionEscolhas.getHigher().value;
+			$(".mychoice").append($("<h1 />").html(['Se você fosse um Plainswalker, você seria ', escolha].join('')).appendTo("body"));
+			CollectionEscolhas.rankingGraphic();
+		}
+	}
+
+	Bootstrap.init();
+	</script>
+</body>
+</html>
