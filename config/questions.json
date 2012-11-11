@@ -1,0 +1,81 @@
+{
+    "results": [{
+        "question": "De onde você retira sua mana?",
+        "answers": [{
+            "text": "Da natureza e de forças primordiais.",
+            "beneficiers": [1, 2, 3, 4, 5]
+        }, {
+            "text": "Das artes e das ciências.",
+            "beneficiers": [6, 7, 8, 9, 10]
+        }, {
+            "text": "De forças ancestrais.",
+            "beneficiers": [11, 12, 13, 14, 15]
+        }, {
+            "text": "De multidões e exércitos.",
+            "beneficiers": [16, 17, 18, 19]
+        }, {
+            "text": "Do banco.",
+            "beneficiers": [1,1,1,1,1,1,1,1]
+        }]
+    }, {
+        "question": "Qual você considera a melhor forma de se vencer um duelo?",
+        "answers": [{
+            "text": "Utilizando técnicas apuradas de combate.",
+            "beneficiers": [15, 12, 7, 6]
+        }, {
+            "text": "Através da inteligência, sem utilizar força física.",
+            "beneficiers": [8, 13, 1, 10, 9]
+        }, {
+            "text": "Liderando um exército disciplinado.",
+            "beneficiers": [17, 5, 18, 16, 14]
+        }, {
+            "text": "Invocando forças altamente destrutivas.",
+            "beneficiers": [11, 4, 2, 3]
+        }]
+    }, {
+        "question": "Qual é o seu maior tesouro?",
+        "answers": [{
+            "text": "Sua coleção de artefatos poderosos.",
+            "beneficiers": [6, 10, 9, 13]
+        }, {
+            "text": "Sua raça e seus ancestrais.",
+            "beneficiers": [5, 4, 15, 16, 14]
+        }, {
+            "text": "Sua inteligência e conhecimento.",
+            "beneficiers": [1, 8, 12, 11]
+        }, {
+            "text": "Sua origem e natividade.",
+            "beneficiers": [3, 7, 18, 2, 17]
+        }]
+    }, {
+        "question": "Qual o lugar ideal para se viver?",
+        "answers": [{
+            "text": "Em meio a natureza intocada.",
+            "beneficiers": [2, 17, 5, 4]
+        }, {
+            "text": "Numa sociedade pacífica buscando pela harmonia.",
+            "beneficiers": [3, 1, 7, 8]
+        }, {
+            "text": "Em meio a tranquilidade onde você possa estudar e metidar.",
+            "beneficiers": [18, 10, 12, 14, 15]
+        }, {
+            "text": "Numa sociedade hostil onde somente os fortes sobrevivem.",
+            "beneficiers": [9, 6, 11, 16, 13]
+        }]
+    }, {
+        "question": "Com relação aos outros.",
+        "answers": [{
+            "text": "Sempre é muito observador, estuda cada habito e costumes.",
+            "beneficiers": [6, 14, 16, 1, 8]
+        }, {
+            "text": "Solitário, prefere se aperfeiçoar sozinho.",
+            "beneficiers": [5, 12, 18, 3, 11]
+        }, {
+            "text": "É uma peça chave pra articulação de plano.",
+            "beneficiers": [4, 10, 17, 9]
+        }, {
+            "text": "Utiliza seus poderes apenas quando incomodado.",
+            "beneficiers": [2, 15, 13, 7]
+        }]
+    }]
+}
