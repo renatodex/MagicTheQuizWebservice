@@ -57,4 +57,20 @@ app.get('/plainswalker', function(req, res){
     res.end(JSON.stringify(body));    
 });
 
+app.get('/questions', function(req, res) {
+    var json_questions_clone = json_questions.results;
+    
+    for(var i in json_questions_clone) {
+        var json_question = json_questions_clone[i];
+        
+        for(var j in json_question['answers']) {
+            var json_answer = json_question['answers'][j];
+            delete json_answer.beneficiers;
+        }
+    }
+    
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(json_questions_clone));   
+});
+
 app.listen(5454);
