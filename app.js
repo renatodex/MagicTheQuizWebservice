@@ -2,6 +2,7 @@ require.extensions[".json"] = function (m) {
     m.exports = (require('fs').readFileSync(m.filename, 'utf8'));
 };
 
+var _und = require('underscore');
 var ejs = require('ejs');
 var express = require('express');
 global.json_choices = JSON.parse(require('./config/choices.json'));
@@ -29,10 +30,14 @@ var Validator = {
 }
 
 var app = express();
+app.set( "jsonp callback", true );
+
+
 app.get('/plainswalker', function(req, res){    
     try {
         var body;
-        var answers = req.query['answers'];    
+        var answers = req.query['answers'];   
+        console.log(answers);
         models.Bootstrap.init();   
         
         if(!Validator.checkIfAnswerIsFilled(answers)) {
@@ -52,25 +57,29 @@ app.get('/plainswalker', function(req, res){
         body = WebResult.error(err);
     }
     
-    
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(body));    
+    res.jsonp(body);    
 });
 
 app.get('/questions', function(req, res) {
-    var json_questions_clone = json_questions.results;
+    var json_questions_clone = _und.clone(json_questions.results);
+    var result = [];
+    var answers_array = [];
     
     for(var i in json_questions_clone) {
-        var json_question = json_questions_clone[i];
+        answers_array = [];
+        for(var j in json_questions_clone[i].answers) {
+            answers_array[j] = json_questions_clone[i].answers[j].text;
+        }        
         
-        for(var j in json_question['answers']) {
-            var json_answer = json_question['answers'][j];
-            delete json_answer.beneficiers;
+        result[i] = {
+            question : json_questions_clone[i].question,
+            answers : answers_array
         }
     }
     
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(json_questions_clone));   
+    res.jsonp(result);
 });
 
 app.listen(5454);
+console.log("Magic the Quiz Webservices rodando na porta 5454. (%s)", app.settings.env);
+
