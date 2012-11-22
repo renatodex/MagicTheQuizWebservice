@@ -8,7 +8,7 @@ var express = require('express');
 global.json_choices = JSON.parse(require('./config/choices.json'));
 global.json_questions = JSON.parse(require('./config/questions.json'));
 
-var models = require('./models/Init');
+var models = require('./models/init');
 var WebResult = models.WebResult; 
 
 var Validator = {
