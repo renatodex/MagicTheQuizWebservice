@@ -2,6 +2,9 @@ require.extensions[".json"] = function (m) {
     m.exports = (require('fs').readFileSync(m.filename, 'utf8'));
 };
 
+var http = require('http');
+var https = require('https');
+var fs = require('fs');
 var _und = require('underscore');
 var ejs = require('ejs');
 var express = require('express');
@@ -10,6 +13,8 @@ global.json_questions = JSON.parse(require('./config/questions.json'));
 
 var models = require('./models/init');
 var WebResult = models.WebResult; 
+
+
 
 var Validator = {
     checkIfAnswerIsFilled : function(answers){
@@ -29,10 +34,20 @@ var Validator = {
     }
 }
 
+var privateKey = fs.readFileSync('certificate_key.key').toString();
+var certificate = fs.readFileSync('certificate.pem').toString();
+var options = {
+  key : privateKey
+, cert : certificate
+}
+
+
 var app = express();
+//var app_http = express();
+//var app_https = module.exports = express.createServer({key: privateKey, cert: certificate});
+
+//function setupServer(app) {
 app.set( "jsonp callback", true );
-
-
 app.get('/plainswalker', function(req, res){    
     try {
         var body;
@@ -79,7 +94,13 @@ app.get('/questions', function(req, res) {
     
     res.jsonp(result);
 });
-
+//}
+//setupServer(app_http);
+//setupServer(app_https);
+//app_http.listen(5454);
+//app_https.listen(5455);
 app.listen(5454);
-console.log("Magic the Quiz Webservices rodando na porta 5454. (%s)", app.settings.env);
+https.createServer(options,app).listen(5455);
+
+console.log("Magic the Quiz Webservices rodando na porta 5454 (HTTPS: 443).");
 
